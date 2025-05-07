@@ -17,15 +17,15 @@ logger = logging.getLogger(__name__)
 # AWS Configuration - Set your AWS credentials
 # Method 1: Directly in code (not recommended for production, but useful for quick testing)
 # Replace these with your actual AWS credentials
-AWS_ACCESS_KEY_ID = "AKIA3FRRIR4H2JXDXDMB"
-AWS_SECRET_ACCESS_KEY = "Wv1mpISwJv6Y9Ez21e4uAzawL01n6EfVpRxWSsjW"
+AWS_ACCESS_KEY_ID = "ACCESS_KEY"
+AWS_SECRET_ACCESS_KEY = "SECRET_KEY"
 AWS_REGION = "us-east-1"  # Replace with your AWS region
 
 # Initialize DynamoDB resource with credentials
 # Comment this section if using environment variables or AWS credential file
 boto3_session = boto3.Session(
-    aws_access_key_id="AKIA3FRRIR4H2JXDXDMB",
-    aws_secret_access_key="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",
+    aws_access_key_id="ACCESS_KEY",
+    aws_secret_access_key="SECRET_KEY",
     region_name="us-east-1"
 )
 dynamodb = boto3_session.resource("dynamodb")
