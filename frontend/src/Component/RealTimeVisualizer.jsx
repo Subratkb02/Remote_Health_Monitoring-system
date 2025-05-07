@@ -52,9 +52,9 @@ function RealTimeVisualizer({ title, chartData }) {
   // Determine y-axis range based on data type
   const getYAxisConfig = () => {
     switch(title.toLowerCase()) {
-      case "temperature:":
+      case "Body temperature:":
         return { min: 25, max: 45 }; // Common body temperature range in Celsius
-      case "heart rate:":
+      case "Pressure:":
         return { min: 30, max: 180 }; // Heart rate range in BPM
       default:
         return { min: 0, max: 120 };

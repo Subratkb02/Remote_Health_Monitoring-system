@@ -159,8 +159,10 @@ function Dashboard() {
       <Header />
       <h1 style={{ textAlign: "center", color: "#000000" }}>Patient Monitoring</h1>
       <div className="gaps">
-        <RealTimeVisualizer title="Heart Rate:" chartData={heartRate} />
-        <RealTimeVisualizer title="Temperature:" chartData={temperature} />
+        <RealTimeVisualizer title="Atmospheric Temperature:" chartData={heartRate} />
+        <RealTimeVisualizer title="Body Temperature:" chartData={temperature} />
+        <RealTimeVisualizer title="Pressure:" chartData={temperature} />
+        
       </div>
     </div>
   );
