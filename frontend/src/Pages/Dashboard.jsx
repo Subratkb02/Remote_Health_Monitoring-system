@@ -108,7 +108,7 @@ function Dashboard() {
   const setHeartRate = contextValues?.setHeartRate || setLocalHeartRate;
 
   useEffect(() => {
-    const socket = new WebSocket("ws://127.0.0.1:5050");
+    const socket = new WebSocket("ws://127.0.0.1:5000");
     
     socket.onopen = () => {
       console.log("✅ WebSocket connection established.");

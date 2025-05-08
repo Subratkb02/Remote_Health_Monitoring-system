@@ -1,4 +1,4 @@
-import  { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
 
 const AppContext = createContext();
@@ -9,7 +9,11 @@ const AppFieldsProvider = ({ children }) => {
   const [pulseRate, setPulseRate] = useState([]);
   const [bodyTemperature, setBodyTemp] = useState([]);
   const [beatsAvg, setBeatsAvg] = useState([]);
-  const DATA_URL = "54.83.118.12:8000/ws";
+
+  // ✅ Dynamically determine WebSocket URL based on environment
+  const DATA_URL = import.meta.env.DEV
+    ? "ws://localhost:5000"
+    : "ws://54.83.118.12:5000"; // Use your domain or public IP here
 
   return (
     <AppContext.Provider
@@ -35,9 +39,9 @@ const AppFieldsProvider = ({ children }) => {
 export const useAppState = () => {
   return useContext(AppContext);
 };
+
 AppFieldsProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
 export default AppFieldsProvider;
-
