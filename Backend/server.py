@@ -6,7 +6,7 @@ import decimal
 
 # Initialize DynamoDB
 dynamodb = boto3.resource("dynamodb", region_name="us-east-1")
-table = dynamodb.Table("mavex_db")
+table = dynamodb.Table("new_table")
 
 # Store the last processed payload
 last_processed_payload = None
@@ -24,7 +24,7 @@ async def fetch_data_from_dynamodb():
 
     try:
         print("Fetching data from DynamoDB...")
-        response = table.scan()
+        response = table.scan()  # You may want to use query instead of scan if you can filter data
         items = response.get("Items", [])
 
         if not items:
@@ -51,9 +51,9 @@ async def fetch_data_from_dynamodb():
 
         data = {
             "SensorData": {
-                "bmp_temp": float(payload.get("bmp_temp", {}).get("N", 0.0)),
-                "probe_temp": float(payload.get("probe_temp", {}).get("N", 0.0)),
-                "pressure": float(payload.get("pressure", {}).get("N", 0.0))
+                "bmp_temp": float(payload.get("bmp_temp", 0.0)),
+                "probe_temp": float(payload.get("probe_temp", 0.0)),
+                "pressure": float(payload.get("pressure", 0.0))
             }
         }
 
@@ -90,6 +90,9 @@ async def send_data_from_dynamodb(websocket, path):
                 await websocket.send(json.dumps(data))
             else:
                 print("No new data to send.")
+                # Optionally, send the last known data if needed
+                if last_processed_payload:
+                    await websocket.send(json.dumps({"SensorData": last_processed_payload}))
 
             await asyncio.sleep(1)
 
